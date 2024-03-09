@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path d='M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 96a88 88 0 1 1-88 88 88 88 0 0 1 88-88zm0 352c-123.71 0-224-100.29-224-224 0-42.18 11.63-81.45 31.66-114.64a146.89 146.89 0 0 0 45.47 27.27c-1.36 7.55-2.13 15.3-2.13 23.37 0 123.71 100.29 224 224 224 8.07 0 15.82-.77 23.37-2.13a146.89 146.89 0 0 0 27.27 45.47C337.45 468.37 298.18 480 256 480z'/></svg>" type="image/svg+xml">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #461d58 0%, #38013a 100%);
+            color: #333;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .dark-mode {
+            background: #121212; /* Dark mode background */
+            color: #e0e0e0; /* Dark mode text color */
+        }
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .dark-mode .login-container {
+            background: #333; /* Dark mode container background */
+            color: #fff; /* Dark mode container text color */
+        }
+
+        input[type=email], button {
+            width: calc(100% - 20px);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 50px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .dark-mode input[type=email], .dark-mode button {
+            background: #424242; /* Dark mode input and button background */
+            color: #e0e0e0; /* Dark mode input and button text color */
+            border-color: #616161; /* Dark mode input and button border color */
+        }
+
+        button {
+            border: none;
+            background-image: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-image: linear-gradient(45deg, #764ba2, #667eea);
+        }
+
+        .mode-toggle {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #667eea;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .mode-toggle:hover {
+            background-color: #764ba2;
+        }
+
+        .mode-icon i {
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .dark-mode .mode-toggle {
+            background-color: #333;
+        }
+
+        .dark-mode .mode-icon i {
+            transform: rotate(180deg);
+        }
+
+        .feedback {
+            display: none;
+            color: #5d0e68;
+            margin-top: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .dark-mode .feedback {
+            color: #bb86fc; /* Dark mode feedback text color */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Welcome Back!</h2>
+        <form id="loginForm" method="post">
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <button type="submit">Send Magic Link</button>
+        </form>
+        <p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+        <div id="feedback" class="feedback">Check your inbox for the magic link!</div>
+    </div>
+    <button id="modeToggle" class="mode-toggle">
+        <span class="mode-icon"><i class="fas fa-sun"></i></span>
+    </button>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            document.getElementById('feedback').style.display = 'block';
+        });
+
+        document.getElementById('modeToggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.mode-icon i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        });
+    </script>
+</body>
+</html>
