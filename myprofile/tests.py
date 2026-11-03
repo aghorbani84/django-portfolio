@@ -9,7 +9,7 @@ class PortfolioTests(TestCase):
     def test_homepage_loads(self):
         response = self.client.get(reverse("home"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "آبولفضل قربانی")
+        self.assertContains(response, "ابوالفضل قربانی")
 
     def test_contact_form_saves_message(self):
         response = self.client.post(reverse("home"), {
