@@ -17,12 +17,15 @@ python -m venv .venv
 source .venv/bin/activate
 # Windows PowerShell: .venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
+# Linux/macOS development shell
+export DJANGO_DEBUG=True
+export DJANGO_SECRET_KEY=local-development-key-change-me
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Open http://127.0.0.1:8000/ and use /admin/ to manage portfolio content.
+On Windows PowerShell, set the same variables with `$env:DJANGO_DEBUG = "True"` and `$env:DJANGO_SECRET_KEY = "local-development-key-change-me"`. Open http://127.0.0.1:8000/ and use /admin/ to manage portfolio content.
 
 ## Configuration
 
